@@ -11,7 +11,7 @@ const movieSchema=new Schema({
     country:String,
     year:Number,
     imdbScore:Number,
-    date:{
+    createdAt:{
         type:Date,
         default:Date.now
     }
