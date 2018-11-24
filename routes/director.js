@@ -116,4 +116,36 @@ router.get('/:directorId',(req,res)=>{
     })
 });
 
+router.put('/:directorId',(req,res,next)=>{
+    const promise=Director.findByIdAndUpdate(
+        req.params.directorId,
+        req.body,
+        {
+            new:true  //güncellenen verinin dönmesi için {new:true},kullanılmazsa güncellenir ama eski veri döner.Zorunlu değil.
+        }
+        );
+                                                                                    
+    promise.then((data)=>{
+      if(!data){
+        next({message:'The director was not found!!',code:99});
+      }
+      res.json(data);
+    }).catch((err)=>{
+      res.json(err);
+    });
+});
+
+  router.delete('/:directorId',(req,res,next)=>{
+    const promise=Director.findByIdAndRemove(req.params.directorId);
+  
+    promise.then((data)=>{
+      if(!data){
+        next({message:'This director was not found!!',code:99});
+      }
+      res.json({status:true});
+    }).catch((err)=>{
+      res.json(err);
+    });
+});
+
 module.exports = router;
