@@ -8,6 +8,7 @@ module.exports=()=>{
     mongoose.connection.on('error',(err)=>{
         console.log('Bağlantı başarısız: ',err);
     });
-//promiseyapısını kullanmak için mongoose.save() için
+    
+//promise yapısını kullanmak için mongoose.save() için
     mongoose.Promise=global.Promise;
 };

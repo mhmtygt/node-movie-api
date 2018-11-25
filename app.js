@@ -13,7 +13,9 @@ const app = express();
 
 //db connection
 const db=require('./helper/db')();
-
+//Secret key kullanmak için
+const config=require('./config');
+app.set('api_secret_key',config.api_secret_key); //config dosyasında tanımlanan anahtarı global olarak kullanmak için
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
