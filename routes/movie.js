@@ -101,7 +101,7 @@ router.post('/', (req, res, next) => {
   //filmi kaydetmek için promise yapısı kullanıldı
   const promise=movie.save();
   promise.then((data)=>{
-    res.json({status:1});  //status:1 kaydedildiğini anlamak için
+    res.json(data);  
   }).catch((err)=>{
     res.json(err);
   })

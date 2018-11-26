@@ -30,9 +30,36 @@ describe('/api/movies test',()=>{
                 done();
 
             });
-        })
+        });
     });
 
-    
+    describe('POST movies',()=>{
+        
+        it('it should POST a movie',(done)=>{
+            const testMovie={
+                title:'test movie',
+                directorID:'5bf9580b02b2c530c8f230e3',
+                category:'Crime',
+                country:'Turkey',
+                year:'1996',
+                imdbScore:'9.9'
+            };
+            chai.request(server)
+                .post('/api/movies')
+                .send(testMovie)
+                .set('x-access-token',token)
+                .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('title');
+                res.body.should.have.property('directorID');
+                res.body.should.have.property('category');
+                res.body.should.have.property('country');
+                res.body.should.have.property('year');
+                res.body.should.have.property('imdbScore');
+                done();
+            });
+        });
+    });
 });
 
