@@ -79,5 +79,49 @@ describe('/api/movies test',()=>{
             });
         });
     });
+
+    describe('PUT movies',()=>{
+        
+        it('it should PUT a movie',(done)=>{
+            const testMovie={
+                title:'update test movie',
+                directorID:'5bf9580b02b2c530c8f230e7',
+                category:'Comedi',
+                country:'china',
+                year:1658,
+                imdbScore:1.6
+            };
+            chai.request(server)
+                .put('/api/movies/'+ movieId)
+                .send(testMovie)
+                .set('x-access-token',token)
+                .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('title').eql(testMovie.title); //güncellendiğini kontrol etmek için eql() kullanıyoruz
+                res.body.should.have.property('directorID').eql(testMovie.directorID);
+                res.body.should.have.property('category').eql(testMovie.category);
+                res.body.should.have.property('country').eql(testMovie.country);
+                res.body.should.have.property('year').eql(testMovie.year);
+                res.body.should.have.property('imdbScore').eql(testMovie.imdbScore);
+                done();
+            });
+        });
+    });
+
+    describe('DELETE movies',()=>{
+        
+        it('it should DELETE a movie',(done)=>{
+            chai.request(server)
+                .delete('/api/movies/'+ movieId)
+                .set('x-access-token',token)
+                .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(true);
+                done();
+            });
+        });
+    });
 });
 
