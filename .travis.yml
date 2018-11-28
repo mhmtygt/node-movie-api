@@ -1,21 +1,10 @@
 language: node_js
-
-node_js: 
-  - "8"
-
+node_js:
+  - 8
 before_install:
-  - "npm install"
-  - "export NODE_ENV=production"
-
+  - npm install -g node-gyp
+before_script:  
+  - export NODE_ENV=production
+  - npm install  
 script:
-  - "npm run test"
-
-env:
-  - CXX=g++-4.8
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  - npm run test
